@@ -1,0 +1,131 @@
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: #07080b;
+  color: var(--paper);
+  overflow: hidden;
+}
+
+.boot__block {
+  position: absolute;
+  left: var(--gutter);
+  top: calc(var(--gutter) + 8px);
+  width: min(380px, calc(100vw - 2 * var(--gutter)));
+  visibility: hidden;
+  line-height: 2;
+}
+
+.boot__dim {
+  color: var(--grey);
+}
+
+.boot__head {
+  margin-bottom: 18px;
+}
+
+.boot__lines {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+}
+
+.boot__line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  visibility: hidden;
+}
+
+.boot__leader {
+  flex: 1;
+  height: 1px;
+  transform: translateY(-3px);
+  background-image: linear-gradient(90deg, var(--grey) 1px, transparent 1px);
+  background-size: 5px 1px;
+  opacity: 0.6;
+}
+
+.boot__status {
+  min-width: 13ch;
+  text-align: right;
+}
+
+.boot__line.is-warn .boot__status {
+  color: var(--signal);
+}
+
+.boot__line.is-dim .boot__status {
+  color: var(--grey);
+}
+
+.boot__integrity {
+  visibility: hidden;
+  margin-bottom: 22px;
+}
+
+.boot__integrity-n {
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.boot__unknown {
+  visibility: hidden;
+  color: var(--signal);
+}
+
+.boot__title {
+  position: absolute;
+  left: 50%;
+  bottom: calc(50% + 28px);
+  transform: translateX(-50%);
+  width: calc(100vw - 2 * var(--gutter));
+  text-align: center;
+  visibility: hidden;
+}
+
+.boot__title-code {
+  color: var(--grey);
+  margin-bottom: 20px;
+}
+
+.boot__title-text {
+  margin: 0;
+  font-size: clamp(40px, 7.4vw, 112px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.boot__mask {
+  display: block;
+  overflow: hidden;
+  padding: 0 0.04em 0.06em;
+}
+
+.boot__title-a {
+  font-style: italic;
+  font-size: 0.42em;
+  color: var(--metal);
+}
+
+.boot__rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  margin-top: -0.5px;
+  background: var(--paper);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.boot__skip {
+  position: absolute;
+  right: var(--gutter);
+  bottom: var(--gutter);
+  margin: 0;
+  color: #3a3e46;
+}

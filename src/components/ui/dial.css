@@ -1,0 +1,105 @@
+.dial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--paper);
+}
+
+.dial__svg {
+  width: var(--dial-size, 220px);
+  height: var(--dial-size, 220px);
+  touch-action: none;
+  overflow: visible;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.dial__bezel {
+  fill: none;
+  stroke: rgba(243, 240, 232, 0.12);
+}
+
+.dial__tick {
+  stroke: rgba(243, 240, 232, 0.35);
+  stroke-width: 1;
+}
+
+.dial__tick.is-major {
+  stroke: rgba(243, 240, 232, 0.8);
+}
+
+.dial__num {
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  letter-spacing: 0.1em;
+  fill: var(--grey);
+}
+
+.dial__track {
+  fill: none;
+  stroke: rgba(243, 240, 232, 0.08);
+  stroke-width: 2;
+}
+
+.dial__arc {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 2;
+}
+
+.dial__knob {
+  fill: #0d1626;
+  stroke: rgba(243, 240, 232, 0.35);
+}
+
+.dial__grip {
+  stroke: rgba(243, 240, 232, 0.28);
+}
+
+.dial__face {
+  fill: #101b2e;
+  stroke: rgba(243, 240, 232, 0.1);
+}
+
+.dial__needle {
+  stroke: var(--signal);
+  stroke-width: 2;
+}
+
+.dial__needle-dot {
+  fill: var(--signal);
+}
+
+.dial__hub {
+  fill: var(--metal);
+}
+
+.dial__value {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  fill: var(--paper);
+  pointer-events: none;
+}
+
+.dial__label {
+  color: var(--grey);
+  letter-spacing: 0.4em;
+  transition: color 0.3s;
+}
+
+.dial__svg[data-held] + .dial__label,
+.dial__svg:focus-visible + .dial__label {
+  color: var(--paper);
+}
+
+.dial__svg:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 6px;
+  border-radius: 50%;
+}
+
+.dial.is-disabled {
+  opacity: 0.4;
+}

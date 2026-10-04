@@ -1,0 +1,66 @@
+.shutter {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  visibility: hidden;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.shutter__plate {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50.5%;
+  background: var(--ink);
+  pointer-events: auto;
+}
+
+.shutter__plate--top {
+  top: 0;
+  background-image: repeating-linear-gradient(90deg, transparent 0 119px, rgba(243, 240, 232, 0.04) 119px 120px);
+}
+
+.shutter__plate--bottom {
+  bottom: 0;
+  background-image: repeating-linear-gradient(90deg, transparent 0 119px, rgba(243, 240, 232, 0.04) 119px 120px);
+}
+
+.shutter__bolt {
+  position: absolute;
+  left: 18px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid rgba(243, 240, 232, 0.25);
+}
+.shutter__plate--top .shutter__bolt {
+  bottom: 14px;
+}
+.shutter__plate--bottom .shutter__bolt {
+  top: 14px;
+}
+.shutter__bolt--r {
+  left: auto;
+  right: 18px;
+}
+
+.shutter__seam {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--signal);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.shutter__label {
+  position: absolute;
+  top: calc(50% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--paper);
+  white-space: nowrap;
+}

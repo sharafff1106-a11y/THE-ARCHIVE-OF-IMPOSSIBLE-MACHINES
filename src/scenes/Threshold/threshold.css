@@ -1,0 +1,132 @@
+.threshold {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  color: var(--ink);
+  pointer-events: none;
+}
+
+.threshold__half {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: var(--paper);
+  pointer-events: auto;
+  overflow: hidden;
+}
+
+.threshold__half--top {
+  top: 0;
+}
+
+.threshold__half--bottom {
+  bottom: 0;
+}
+
+.threshold__seam {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  margin-top: -0.5px;
+  background: var(--ink);
+  z-index: 2;
+}
+
+.threshold__upper,
+.threshold__lower {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.threshold__upper {
+  bottom: 0;
+}
+
+.threshold__lower {
+  top: 18px;
+}
+
+.threshold__mask {
+  display: block;
+  overflow: hidden;
+}
+
+.threshold__code {
+  display: block;
+  color: var(--grey);
+  letter-spacing: 0.5em;
+  margin: 0 0 4px 0.5em;
+}
+
+.threshold__numeral {
+  display: block;
+  font-size: clamp(160px, 34vh, 380px);
+  line-height: 0.74;
+  letter-spacing: -0.04em;
+  /* sit the numeral's baseline exactly on the seam */
+  margin-bottom: -0.02em;
+}
+
+.threshold__words {
+  display: block;
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.05;
+}
+
+.threshold__enter {
+  margin-top: clamp(28px, 6vh, 64px);
+}
+
+.threshold__meta {
+  position: absolute;
+  color: var(--grey);
+  line-height: 1.9;
+}
+
+.threshold__meta--tl {
+  top: var(--gutter);
+  left: var(--gutter);
+}
+.threshold__meta--tr {
+  top: var(--gutter);
+  right: var(--gutter);
+  text-align: right;
+}
+.threshold__meta--bl {
+  bottom: var(--gutter);
+  left: var(--gutter);
+}
+.threshold__meta--br {
+  bottom: var(--gutter);
+  right: var(--gutter);
+  text-align: right;
+}
+
+/* Calibration ticks where the seam meets the margins */
+.threshold__mark {
+  position: absolute;
+  bottom: 0;
+  width: 1px;
+  height: 14px;
+  background: var(--ink);
+}
+.threshold__mark--l {
+  left: var(--gutter);
+}
+.threshold__mark--r {
+  right: var(--gutter);
+}
+
+@media (max-width: 640px) {
+  .threshold__meta--tr,
+  .threshold__meta--br {
+    display: none;
+  }
+}

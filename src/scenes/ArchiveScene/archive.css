@@ -1,0 +1,114 @@
+.archive {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.archive__body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+}
+
+.archive__rail {
+  min-height: 0;
+  overflow: hidden auto;
+  position: relative;
+  z-index: 10;
+}
+
+.archive__stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* A faint measuring grid: the stage is an instrument, not a canvas. */
+.archive__stage-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 100% 25%, 25% 100%;
+  opacity: 0.45;
+}
+
+.archive__loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  color: var(--grey);
+}
+
+.reading-room {
+  position: absolute;
+  inset: 0;
+}
+
+.reading-room__line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  text-align: center;
+  line-height: 2.4;
+  letter-spacing: 0.3em;
+}
+
+.reading-room__wake {
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: var(--signal);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.reading-room__wake:hover {
+  border-bottom-color: var(--signal);
+}
+
+.reading-room__log {
+  position: absolute;
+  left: var(--gutter);
+  bottom: var(--gutter);
+  margin: 0;
+  color: var(--grey);
+  display: grid;
+  gap: 4px;
+}
+
+.reading-room__log div {
+  display: flex;
+  gap: 18px;
+}
+
+.reading-room__log dt {
+  min-width: 15ch;
+}
+
+.reading-room__log dd {
+  margin: 0;
+  color: var(--fg);
+}
+
+@media (max-width: 860px) {
+  .archive__body {
+    /* minmax(0, …) stops the scrolling index strip from widening the stage */
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  .archive__rail {
+    overflow: visible;
+    min-width: 0;
+  }
+}

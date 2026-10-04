@@ -1,0 +1,27 @@
+.interlude {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: var(--navy);
+  color: var(--paper);
+}
+
+.interlude__beat {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  visibility: hidden;
+}
+
+.interlude__n {
+  color: var(--grey);
+}
+
+.interlude__s {
+  font-size: 13px;
+  letter-spacing: 0.32em;
+}

@@ -1,0 +1,45 @@
+/* ─────────────────────────────────────────────────────────────
+   ARCHIVE VISUAL SYSTEM — TOKENS
+   Paper + ink + deep navy. Signals are used sparingly.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  --paper: #f3f0e8;
+  --warm-white: #faf9f5;
+  --ink: #111318;
+  --navy: #0b1b35;
+  --navy-muted: #263c5a;
+  --grey: #7b8088;
+  --blueprint: #315a91;
+  --signal: #b74336;
+  --metal: #b8b4aa;
+
+  /* Semantic roles (swapped by the night-shift easter egg) */
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --fg-soft: #4a4f58;
+  --rule: rgba(17, 19, 24, 0.18);
+  --rule-strong: rgba(17, 19, 24, 0.55);
+
+  --font-serif: 'Instrument Serif', 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --gutter: clamp(16px, 2.4vw, 32px);
+  --header-h: 52px;
+  --rail-w: 300px;
+
+  --ease-mech: cubic-bezier(0.77, 0, 0.18, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+}
+
+:root[data-shift='night'] {
+  --bg: var(--ink);
+  --fg: var(--paper);
+  --fg-soft: #a9a59b;
+  --rule: rgba(243, 240, 232, 0.16);
+  --rule-strong: rgba(243, 240, 232, 0.5);
+  color-scheme: dark;
+}

@@ -1,0 +1,135 @@
+.archive-cursor {
+  /* zero-sized so the blend layer is only as big as what it paints */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: difference;
+  color: #f3f0e8;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.archive-cursor[data-visible='true'] {
+  opacity: 1;
+}
+
+.archive-cursor__ring,
+.archive-cursor__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.archive-cursor__point {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: currentColor;
+  transition: transform 0.35s var(--ease-out), opacity 0.2s;
+}
+
+.archive-cursor__shape {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.4);
+  transition:
+    transform 0.45s var(--ease-out),
+    opacity 0.25s,
+    border-radius 0.3s,
+    width 0.45s var(--ease-out),
+    height 0.45s var(--ease-out),
+    margin 0.45s var(--ease-out);
+}
+
+.archive-cursor__tag {
+  position: absolute;
+  left: 22px;
+  top: 14px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* HOVER — the circle expands */
+.archive-cursor[data-mode='hover'] .archive-cursor__shape {
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  opacity: 1;
+  transform: scale(1);
+}
+.archive-cursor[data-mode='hover'] .archive-cursor__point {
+  transform: scale(0.5);
+}
+
+/* DRAG — a held ring */
+.archive-cursor[data-mode='drag'] .archive-cursor__shape {
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border-width: 2px;
+  opacity: 1;
+  transform: scale(1);
+}
+.archive-cursor[data-mode='drag'] .archive-cursor__point {
+  transform: scale(0);
+}
+
+/* RETICLE — machine interaction */
+.archive-cursor[data-mode='reticle'] .archive-cursor__shape {
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  opacity: 1;
+  transform: scale(1) rotate(45deg);
+  border-radius: 0;
+  border-color: transparent;
+  background:
+    linear-gradient(currentColor, currentColor) top left / 10px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) top left / 1px 10px no-repeat,
+    linear-gradient(currentColor, currentColor) top right / 10px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) top right / 1px 10px no-repeat,
+    linear-gradient(currentColor, currentColor) bottom left / 10px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) bottom left / 1px 10px no-repeat,
+    linear-gradient(currentColor, currentColor) bottom right / 10px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) bottom right / 1px 10px no-repeat;
+}
+.archive-cursor[data-mode='reticle'] .archive-cursor__point {
+  transform: scale(0.6);
+}
+
+/* CROSSHAIR — hidden things */
+.archive-cursor[data-mode='crosshair'] .archive-cursor__shape {
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  opacity: 1;
+  transform: scale(1);
+  border-color: transparent;
+  border-radius: 0;
+  background:
+    linear-gradient(currentColor, currentColor) center / 1px 100% no-repeat,
+    linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat;
+}
+.archive-cursor[data-mode='crosshair'] .archive-cursor__point {
+  transform: scale(0);
+}
+
+.archive-cursor[data-mode='hidden'] {
+  opacity: 0 !important;
+}

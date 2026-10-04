@@ -1,0 +1,535 @@
+.memory {
+  position: absolute;
+  inset: 0;
+  background: var(--navy);
+  color: var(--paper);
+  overflow: hidden;
+  --pad: clamp(18px, 2.6vw, 36px);
+}
+
+.memory-scene {
+  position: absolute;
+  inset: 0;
+}
+
+.memory__vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(243, 240, 232, 0.018) 0 1px, transparent 1px 3px),
+    radial-gradient(120% 90% at 45% 50%, transparent 45%, rgba(4, 7, 13, 0.72) 100%);
+}
+
+.memory__ui {
+  position: absolute;
+  z-index: 2;
+}
+
+/* The cut: when the memory is taken, every instrument disappears at once. */
+.memory[data-cut] .memory__ui,
+.memory[data-cut] .memory__frame {
+  visibility: hidden;
+}
+
+.memory__dim {
+  color: var(--grey);
+}
+
+/* ── Frame & screws ─────────────────────────────────────── */
+
+.memory__frame {
+  position: absolute;
+  inset: 12px;
+  pointer-events: none;
+  border: 1px solid rgba(243, 240, 232, 0.08);
+  z-index: 1;
+}
+
+.screw {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid rgba(243, 240, 232, 0.35);
+  pointer-events: auto;
+  transition: transform 0.9s var(--ease-out);
+}
+
+.screw::after {
+  content: '';
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: 3px;
+  height: 1px;
+  background: rgba(243, 240, 232, 0.5);
+}
+
+.screw:hover {
+  transform: rotate(270deg);
+}
+
+.screw:nth-child(1) {
+  top: -5px;
+  left: -5px;
+}
+.screw:nth-child(2) {
+  top: -5px;
+  right: -5px;
+}
+.screw:nth-child(3) {
+  bottom: -5px;
+  left: -5px;
+}
+.screw:nth-child(4) {
+  bottom: -5px;
+  right: -5px;
+}
+
+/* ── Title ───────────────────────────────────────────────── */
+
+.memory__title {
+  top: calc(var(--pad) + 6px);
+  left: calc(var(--pad) + 6px);
+  pointer-events: none;
+}
+
+.memory__code {
+  margin-bottom: 14px;
+}
+
+.memory__name {
+  margin: 0;
+  font-size: clamp(46px, 6.4vw, 104px);
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  transition: letter-spacing 2.5s var(--ease-out);
+}
+
+.memory[data-phase='active'] .memory__name,
+.memory[data-phase='overload'] .memory__name {
+  letter-spacing: 0.01em;
+}
+
+.memory__mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.memory__hint {
+  margin: 12px 0 0;
+  font-size: 19px;
+  color: var(--metal);
+}
+
+/* ── Readout ─────────────────────────────────────────────── */
+
+.memory__readout {
+  top: calc(var(--pad) + clamp(150px, 15vw, 210px));
+  left: calc(var(--pad) + 6px);
+  margin: 0;
+  display: grid;
+  gap: 14px;
+  pointer-events: none;
+}
+
+.memory__readout dt {
+  color: var(--grey);
+  margin-bottom: 2px;
+}
+
+.memory__readout dd {
+  margin: 0;
+}
+
+.memory__status {
+  display: inline-block;
+  min-width: 10ch;
+}
+
+.memory__capacity {
+  font-size: 30px;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.memory[data-phase='overload'] .memory__status,
+.memory[data-phase='overload'] .memory__capacity {
+  color: var(--signal);
+  animation: memory-jitter 0.12s steps(2) infinite;
+}
+
+.reduced-motion .memory[data-phase='overload'] .memory__status,
+.reduced-motion .memory[data-phase='overload'] .memory__capacity {
+  animation: none;
+}
+
+@keyframes memory-jitter {
+  50% {
+    transform: translateX(1px);
+  }
+}
+
+/* ── Controls ────────────────────────────────────────────── */
+
+.memory__controls {
+  right: calc(var(--pad) + 10px);
+  top: 50%;
+  transform: translateY(-54%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+.memory__aux {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.lever {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.lever__svg {
+  width: 50px;
+  height: 158px;
+  touch-action: none;
+  overflow: visible;
+}
+
+.lever__slot {
+  fill: #050a14;
+  stroke: rgba(243, 240, 232, 0.25);
+}
+
+.lever__mark {
+  stroke: rgba(243, 240, 232, 0.3);
+}
+
+.lever__end {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  fill: var(--grey);
+  letter-spacing: 0.1em;
+}
+
+.lever__rod {
+  fill: var(--metal);
+}
+
+.lever__grip {
+  fill: var(--signal);
+}
+
+.lever__grip-line {
+  stroke: rgba(0, 0, 0, 0.35);
+}
+
+.lever__label {
+  color: var(--grey);
+  letter-spacing: 0.4em;
+}
+
+.lever__svg:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 4px;
+}
+
+.lever.is-disabled {
+  opacity: 0.4;
+}
+
+.memory__buttons {
+  display: grid;
+  grid-template-columns: 44px 44px;
+  gap: 8px;
+  align-content: start;
+  padding-top: 8px;
+}
+
+.memory__key {
+  height: 44px;
+  border: 1px solid rgba(243, 240, 232, 0.3);
+  background: #0d1626;
+  transition: background-color 0.15s, transform 0.08s;
+  box-shadow: 0 2px 0 rgba(243, 240, 232, 0.12);
+}
+
+.memory__key:hover {
+  background: #142037;
+}
+
+.memory__key:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.memory__key--warn {
+  color: var(--signal);
+  font-size: 14px;
+}
+
+.memory__key:disabled {
+  opacity: 0.35;
+}
+
+.memory__warnline {
+  grid-column: 1 / -1;
+  margin: 6px 0 0;
+  width: 112px;
+  min-height: 3.6em;
+  line-height: 1.6;
+  color: var(--paper);
+}
+
+/* ── Telemetry ───────────────────────────────────────────── */
+
+.memory__telemetry {
+  left: calc(var(--pad) + 6px);
+  bottom: calc(var(--pad) + 6px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 3px;
+  color: var(--grey);
+}
+
+.memory__telemetry b {
+  font-weight: 400;
+  color: var(--paper);
+  margin-left: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.memory__hoverable {
+  pointer-events: auto;
+}
+
+/* ── State rail ──────────────────────────────────────────── */
+
+.memory__states {
+  left: 50%;
+  bottom: calc(var(--pad) + 6px);
+  transform: translateX(-50%);
+  width: min(460px, 40vw);
+}
+
+.memory__states ol {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  color: var(--grey);
+}
+
+.memory__states li.is-current {
+  color: var(--paper);
+}
+
+.memory[data-phase='overload'] .memory__states li.is-current {
+  color: var(--signal);
+}
+
+.memory__track {
+  position: relative;
+  height: 9px;
+  background:
+    linear-gradient(90deg, rgba(243, 240, 232, 0.4) 1px, transparent 1px) 0 0 / 25% 100%,
+    linear-gradient(rgba(243, 240, 232, 0.25), rgba(243, 240, 232, 0.25)) 0 50% / 100% 1px no-repeat;
+  border-right: 1px solid rgba(243, 240, 232, 0.4);
+}
+
+.memory__marker {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.memory__marker i {
+  position: absolute;
+  left: -1px;
+  top: -4px;
+  width: 2px;
+  height: 17px;
+  background: var(--signal);
+}
+
+/* ── Annotation ──────────────────────────────────────────── */
+
+.memory__note {
+  left: calc(var(--pad) + 6px);
+  top: 54%;
+  display: grid;
+  gap: 4px;
+  padding-left: 12px;
+  border-left: 1px solid transparent;
+  pointer-events: none;
+  transition: border-color 0.3s;
+}
+
+.memory__note.is-on {
+  border-left-color: var(--signal);
+}
+
+.memory__note-name {
+  color: var(--paper);
+}
+
+/* ── Exit ────────────────────────────────────────────────── */
+
+.memory__exit {
+  top: calc(var(--pad) + 2px);
+  right: calc(var(--pad) + 6px);
+  color: var(--grey);
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+.memory__exit:hover {
+  color: var(--paper);
+}
+
+/* ── Completion ──────────────────────────────────────────── */
+
+.memory__stored {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  background: rgba(4, 7, 13, 0.55);
+  letter-spacing: 0.5em;
+}
+
+.memory-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  margin: 0;
+  background: #0b0d12;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.memory-flash__img {
+  width: min(78%, 760px);
+  height: auto;
+  image-rendering: pixelated;
+  aspect-ratio: 240 / 150;
+}
+
+.memory-flash__cap {
+  width: min(78%, 760px);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--grey);
+}
+
+/* ── Small screens: the machine above, the instruments below ── */
+
+@media (max-width: 860px) {
+  .memory-scene {
+    bottom: 230px;
+  }
+  .memory__vignette {
+    bottom: 230px;
+  }
+  .memory__frame {
+    display: none;
+  }
+  .memory__title {
+    top: 16px;
+    left: 16px;
+  }
+  .memory__name {
+    font-size: 40px;
+  }
+  .memory__code {
+    margin-bottom: 8px;
+  }
+  .memory__hint {
+    font-size: 15px;
+    margin-top: 6px;
+  }
+  .memory__readout {
+    top: auto;
+    bottom: 248px;
+    left: 16px;
+    grid-auto-flow: column;
+    gap: 22px;
+  }
+  .memory__capacity {
+    font-size: 22px;
+  }
+  .memory__controls {
+    top: auto;
+    transform: none;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 230px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    border-top: 1px solid rgba(243, 240, 232, 0.12);
+    background: #08142a;
+    --dial-size: 170px;
+  }
+  .memory__aux {
+    gap: 12px;
+  }
+  .lever__svg {
+    height: 130px;
+    width: 40px;
+  }
+  .memory__buttons {
+    grid-template-columns: 40px;
+  }
+  .memory__key {
+    height: 40px;
+  }
+  .memory__warnline {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: -56px;
+    width: auto;
+    min-height: 0;
+  }
+  .memory__telemetry,
+  .memory__states {
+    display: none;
+  }
+  .memory__note {
+    top: 104px;
+    left: 16px;
+  }
+  .memory__exit {
+    top: 14px;
+    right: 16px;
+  }
+  .memory-flash__cap {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+
+@media (max-width: 380px) {
+  .memory__controls {
+    --dial-size: 148px;
+    gap: 12px;
+  }
+}
