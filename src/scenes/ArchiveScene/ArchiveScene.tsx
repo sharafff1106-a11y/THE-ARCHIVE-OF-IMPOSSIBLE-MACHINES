@@ -81,7 +81,11 @@ export function ArchiveScene() {
         setInterlude(null);
       }
       const hash = id ? `#/${machineById(id).slug}` : '#/';
-      if (location.hash !== hash) history.pushState(null, '', hash);
+      try {
+        if (location.hash !== hash) history.pushState(null, '', hash);
+      } catch {
+        /* sandboxed frames may refuse history writes; navigation still works */
+      }
     });
   }, []);
 
